@@ -1,0 +1,80 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url: jdbc:oracle:thin:@//151.101.120.191:1522/desarc
+    username: IDU_PLATAFORMA_EXPE
+    password: plataformaexpe2022
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 10
+      maximum-pool-size: 10
+      idle-timeout: 10000
+      max-lifetime: 1000
+      auto-commit: false
+      
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB  
+  mail: 
+    host: mail.reniec.gob.pe
+#    port: 587
+    username: seguridad@reniec.gob.pe
+#    password: Reniec05
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: false
+ #         starttls:
+ #           enable: false   
+
+application:
+  security:
+    secretKey: W5nDvd98fd4mkg7UXXLThX7u3fF9XzRyEyKjhAhbe9ebNNE4dYNV4aDeGDzhFshD
+    expirationTime: 18000
+    
+  ws-gestion-usuarios:
+    urlIdentificarDni: http://webdesrcwcn1.reniec.gob.pe:7003/ws-gestion-usuario/api/identificar_dni
+    codigoAplicativo: 214
+    ip: 127.0.0.1
+    tiCodigo: 0
+    urlCambioClave: http://webdesrcwcn1.reniec.gob.pe:7003/ws-gestion-usuario/api/modificar_clave
+    urlObtenerPermisos: http://webdesrcwcn1.reniec.gob.pe:7003/ws-gestion-usuario/api/obtener_permisos
+    urlObtenerGrupoPerfiles: http://webdesrcwcn1.reniec.gob.pe:7003/ws-gestion-usuario/api/obtener_grupo_perfiles
+    permisos:
+      '01': ROLE_RECEPCIONAR 
+      '02': ROLE_ASIGNAR
+      '03': ROLE_ATENDER 
+    grupos:
+      - '520'
+      - '521' 
+    codigoPerfilAnalista: '03'
+
+  ws-imagenes:
+    urlFoto: http://weblogdev.reniec.gob.pe:7001/WebServicesImagenes/server/entrega/dni
+    urlFirmaHuella: http://weblogdev.reniec.gob.pe:7001/WebServicesImagenes/server/entrega/firmaHuella
+  notification:
+    subject: Registro de solicitud
+    from: firmaregitrodefirmas@reniec.gob.pe
+    from2: librosdespachodelibros@reniec.gob.pe
+    body-template: |
+        <p>Sr(a). %s:</p>
+        <p>Se notifica la recepción de su solicitud <strong>%s</strong> realizada en la Plataforma de Solicitudes de Registradores Civiles del RENIEC, con fecha %s y N° %s</p>
+        <p>En el transcurso de los días estaremos atendiendo su pedido.</p>
+        <p>RENIEC</p>
+        <p>La información contenida en este correo electrónico es originada por RENIEC, es de uso privilegiado, tiene caracter confidencial y solo puede ser utilizada por la persona a quien ha sido dirigida. Su divulgación, copia y/o adulteración no autorizada está estrictamente prohibida. Si usted no es el destinatario previsto, por favor contáctese con el remitente y elimine el mensaje. Esta comunicación es solo para propósitos de información y no genera obligación contractual alguna a cargo de RENIEC</p>
+  numeracion:
+    inicial: 1
+    longitud: 8
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [%logger:%line] %msg%n"
+  level:
+    root: INFO
+    pe.gob.reniec.rrcc.plataformaelectronica: DEBUG
+    org.springframework: ERROR
+    org.hibernate: ERROR
+
+

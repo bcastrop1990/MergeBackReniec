@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: local
+  config:
+    path: data/plataforma/config
+    name: plataforma-electronica
+    import: file:/${spring.config.path}/${spring.config.name}-${spring.profiles.active}.yml
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
